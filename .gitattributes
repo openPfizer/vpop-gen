@@ -1,0 +1,35 @@
+# Matlab
+*.m	text
+
+# Binary files
+*.p 		binary
+*.mex* 		binary
+*.fig 		binary
+*.mat 		binary
+*.mdl 		binary
+*.slx 		binary
+*.mdlp 		binary
+*.slxp 		binary
+*.sldd 		binary
+*.mltbx 	binary
+*.mlappinstall 	binary
+*.mlpkginstall 	binary
+*.mn binary
+
+# MS Office
+*.xlsx		binary
+*.docx		binary 
+*.pptx		binary
+*.pdf		binary 
+
+# Graphics
+*.dia		text
+*.png		binary
+*.jpg		binary
+*.jpeg		binary
+*.gif		binary
+*.tif		binary
+*.tiff		binary
+*.ico		binary
+*.svg		text
+*.eps		binary

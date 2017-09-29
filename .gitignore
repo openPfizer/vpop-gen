@@ -1,0 +1,11 @@
+*.out
+*.log
+*.err
+Thumbs.db
+*.*~
+*.m~
+.DS_Store
+*.asv
+*.tmp
+*.~*
+~*.*
