@@ -22,17 +22,20 @@ plot_color = [0    0.4470    0.7410
 line_style = {'-';'--';':';'-.'};
 marker_style = {'o';'s';'d';'x'};
 
-std_thin = 5; % factor to thin out the 
+std_thin = 5; % factor to thin out the points plotted
 
 num_pps_lvls = unique(t.num_pps);
 r = t.selection & t.num_pps == max(num_pps_lvls);
 js = t(r,:);
 
 %% Create the ecdf for the random vector:
-p_rand = rand(size(js.PScaled,2)) - 0.5; % zero-centered
-[~,~,rand_x] = get_ecdf_dot(p_rand,num_case,ecdf_save);
+
+for i_uni = 1:10
+    p_rand = rand(size(js.PScaled,2),1000) - 0.5; % zero-centered
+    [~,~,rand_x(:,i_uni)] = get_ecdf_dot(p_rand,num_case,ecdf_save);
+end
 h = figure('units','inches','position',[1 1 20 10],'Name','Orthogonality of Parameters, CDF');
-plot(rand_x,ecdf_save,'-k','LineWidth',3);
+g(1) = plot(mean(rand_x,2),ecdf_save,'-k','LineWidth',3);
 hold on;
 
 meth_x_mean = zeros(numel(ecdf_save),numel(method_order));
@@ -48,6 +51,7 @@ for i_met = 1:numel(method_order)
     for i_iter = 1:num_iter
         r3 = js2.iter == iter_lvls(i_iter);
         p_meth = (js2{r3,'PScaled'} - 0.5)'; % zero-centered
+        %size(p_meth)
         [~,~,meth_x(:,i_iter)] = get_ecdf_dot(p_meth,num_case,ecdf_save);
     end
     
@@ -59,7 +63,7 @@ for i_met = 1:numel(method_order)
         ecdf_save,line_style{i_met},...
         'Color',plot_color(i_met,:),'LineWidth',3);
     
-    g(i_met) = plot(meth_x_mean(std_thin:std_thin:numel(ecdf_save),i_met),...
+    g(i_met+1) = plot(meth_x_mean(std_thin:std_thin:numel(ecdf_save),i_met),...
         ecdf_save(std_thin:std_thin:numel(ecdf_save)),marker_style{i_met},...
         'Color',plot_color(i_met,:),'LineWidth',3,'MarkerSize',20);
     
@@ -81,7 +85,7 @@ ylabel('Cumulative Distribution');
 ylim([0 1.05]);
 set(gca,'Ytick',0:0.2:1);
 set(gca,'FontSize',28,'LineWidth',2);
-legend(g,method_order,'Location','NorthWest');
+legend(g,['Uniform';method_order],'Location','NorthWest');
 legend boxoff;
 
 end % function plot_orthog

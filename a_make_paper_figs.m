@@ -1,9 +1,9 @@
-function a_make_paper_figs(load_file_name)
+function [t, method_order] = a_make_paper_figs(load_file_name)
 %% function a_make_paper_figs
 %   Creates figures from the manuscript. Only input is the full path and
 %   root filename to the .csv files created by a_run_vpop_fit.m. For
-%   example, if a_run_vpop_fit wrote myrun_xxx.csv to /Documents/me/files/
-%   the input would be '/Documents/me/files/myrun_' (the numbers and .csv
+%   example, if a_run_vpop_fit wrote myrun_xxx.csv to /Documents/files/
+%   the input would be '/Documents/files/myrun_' (the numbers and .csv
 %   are added later).
 
 close all;rng('shuffle');
