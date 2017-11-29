@@ -8,11 +8,8 @@ Source code for Rieger et al. 2017.
 ### Required Software
 This code has been tested in MATLAB 2016b (9.1). Execution requires MATLAB's Statistics, Global Optimization, Optimization, and SimBiology toolboxes.
 
-### A Note About Windows Systems
-This code has *only* been tested on Unix-like systems: including Mac OS and RedHat Linux. None of the code has been tested on a Windows system. The authors anticipate problems due to the hard-coding of directory structures. While the fix(es) should be straightforward, the authors are unable to implement them right now (I don't have Matlab on a Windows VM).
-
-### Significant Scripts
-* **a_make_paper_figs.m** - reads the contents of txtout/ and makes figures similar to the manuscript figures.
+### Significant Functions and Scripts
+* **a_make_paper_figs.m** - function that reads the contents of txtout/ and makes figures similar to the manuscript figures.
 * **a_run_vpop_fit.m** - main generation script. Will cycle through methods and iterates to generate data for manuscript.
 
 ### Contact
