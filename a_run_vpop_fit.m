@@ -38,7 +38,7 @@ txt_name = 'txtout/github_run2_'; % Running text files for extremely long runs o
 
 %% Key inputs, ONLY relevant if resume_run == 0 (otherwise overwritten):
 num_pps     = [100;500;1000;5000;10000]; % Number of plausible patients to attempt to create
-num_iters   = 1;                        % <--- Number of iterations
+num_iters   = 7;                        % <--- Number of iterations
 num_regions = 5;                        % NSA-method only input, un-needed otherwise
 methods      = {'SA';'NSA';'MH';'GA'};  % Method to use, must be a precise input (e.g., 'NSA','SA','GA')
 mdl_mat     = 'My_Model.mat';           % Location of the exported SimBiology model
