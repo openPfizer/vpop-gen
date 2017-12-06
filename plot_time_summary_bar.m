@@ -1,16 +1,6 @@
 function plot_time_summary_bar(t,method_order)
 %% Generates Figure 3 in the manuscript
-fs1 = 18;
-lw1 = 1;
-lw2 = 2;
-
-plot_color = [0    0.4470    0.7410
-    0.8500    0.3250    0.0980
-    0.9290    0.6940    0.1250
-    0.4940    0.1840    0.5560
-    0.4660    0.6740    0.1880
-    0.3010    0.7450    0.9330
-    0.6350    0.0780    0.1840];
+p = plot_style;
 
 ymean_pp = zeros(numel(method_order),1);
 ymean_vp = zeros(numel(method_order),1);
@@ -38,34 +28,40 @@ for i = 1:numel(method_order)
     ymean_pp(i) = mean(time_per_pp);
     ymean_vp(i) = mean(time_per_vp);
 
-    bar(i-0.2,ymean_pp(i),0.3,'FaceColor','none','EdgeColor',plot_color(i,:),'LineWidth',lw2);
+    bar(i-0.2,ymean_pp(i),0.3,'FaceColor','none',...
+        'EdgeColor',p.plot_color(i,:),'LineWidth',p.lw1);
     hold on;
-    bar(i+0.2,ymean_vp(i),0.3,'FaceColor',plot_color(i,:),'EdgeColor',plot_color(i,:),'LineWidth',lw2);
+    bar(i+0.2,ymean_vp(i),0.3,'FaceColor',p.plot_color(i,:),...
+        'EdgeColor',p.plot_color(i,:),'LineWidth',p.lw1);
     
     if numel(js) > 1
         % Adding error bars to bar plots in Matlab remains incredibly
         % frustrating...
         yerr_pp(i)  = std(time_per_pp);
         yerr_vp(i) = std(time_per_vp);
-        plot([i-0.2 i-0.2],[ymean_pp(i) yerr_pp(i)+ymean_pp(i)],'Color',plot_color(i,:)','LineWidth',lw2);
-        plot([i+0.2 i+0.2],[ymean_vp(i) yerr_pp(i)+ymean_vp(i)],'Color',plot_color(i,:)','LineWidth',lw2);
-        plot([i-0.3 i-0.1],[yerr_pp(i)+ymean_pp(i) yerr_pp(i)+ymean_pp(i)],'Color',plot_color(i,:)','LineWidth',lw2);
-        plot([i+0.1 i+0.3],[yerr_pp(i)+ymean_vp(i) yerr_pp(i)+ymean_vp(i)],'Color',plot_color(i,:)','LineWidth',lw2);
+        plot([i-0.2 i-0.2],[ymean_pp(i) yerr_pp(i)+ymean_pp(i)],...
+            'Color',p.plot_color(i,:)','LineWidth',p.lw1);
+        plot([i+0.2 i+0.2],[ymean_vp(i) yerr_pp(i)+ymean_vp(i)],...
+            'Color',p.plot_color(i,:)','LineWidth',p.lw1);
+        plot([i-0.3 i-0.1],[yerr_pp(i)+ymean_pp(i) yerr_pp(i)+ymean_pp(i)],...
+            'Color',p.plot_color(i,:)','LineWidth',p.lw1);
+        plot([i+0.1 i+0.3],[yerr_pp(i)+ymean_vp(i) yerr_pp(i)+ymean_vp(i)],...
+            'Color',p.plot_color(i,:)','LineWidth',p.lw1);
     end
     labels{i} = method_order{i};
 end
 
-h(1) = bar(1000,1,'FaceColor','none','EdgeColor','k','LineWidth',lw2);
-h(2) = bar(1002,1,'FaceColor','k','EdgeColor','k','LineWidth',lw2);
+h(1) = bar(1000,1,'FaceColor','none','EdgeColor','k','LineWidth',p.lw1);
+h(2) = bar(1002,1,'FaceColor','k','EdgeColor','k','LineWidth',p.lw1);
 
 set(gca, 'XTick', 1:numel(method_order), 'XTickLabel', labels);
-set(gca,'FontSize',fs1,'LineWidth',lw1);
+set(gca,'FontSize',p.fs1,'LineWidth',p.lw2);
 set(gca, 'YScale','log');
 %set(gca,'YScale','log');
 ylabel('Time (seconds)')
 legend(h,{'Time Per Plausible Patient','Time Per Virtual Patient'});
 legend boxoff;
-xlim([0 numel(method_order)+1]);
+xlim([0.5 numel(method_order)+0.5]);
 
 print('figures/rieger-fig03-time-bar.pdf','-dpdf','-bestfit');
 
