@@ -11,16 +11,7 @@ function plot_orthog(t,method_order)
 num_case = 5e4;
 ecdf_save = linspace(0.001,0.999,50);
 
-plot_color = [0    0.4470    0.7410
-    0.8500    0.3250    0.0980
-    0.9290    0.6940    0.1250
-    0.4940    0.1840    0.5560
-    0.4660    0.6740    0.1880
-    0.3010    0.7450    0.9330
-    0.6350    0.0780    0.1840]; % hard-coding in the plot color order
-
-line_style = {'-';'--';':';'-.'};
-marker_style = {'o';'s';'d';'x'};
+p = plot_style;
 
 std_thin = 5; % factor to thin out the points plotted
 
@@ -35,7 +26,7 @@ for i_uni = 1:10
     [~,~,rand_x(:,i_uni)] = get_ecdf_dot(p_rand,num_case,ecdf_save);
 end
 h = figure('units','inches','position',[1 1 20 10],'Name','Orthogonality of Parameters, CDF');
-g(1) = plot(mean(rand_x,2),ecdf_save,'-k','LineWidth',3);
+g(1) = plot(mean(rand_x,2),ecdf_save,'-k','LineWidth',p.lw1);
 hold on;
 
 meth_x_mean = zeros(numel(ecdf_save),numel(method_order));
@@ -57,36 +48,39 @@ for i_met = 1:numel(method_order)
     
     meth_x_mean(:,i_met) = mean(meth_x,2);
     meth_x_std(:,i_met) = std(meth_x,[],2);
-    ls = strcat(line_style{i_met},marker_style{i_met});
+    ls = strcat(p.line_style{i_met},p.marker_style{i_met});
     
     plot(meth_x_mean(:,i_met),...
-        ecdf_save,line_style{i_met},...
-        'Color',plot_color(i_met,:),'LineWidth',3);
+        ecdf_save,p.line_style{i_met},...
+        'Color',p.plot_color(i_met,:),'LineWidth',p.lw1);
     
     g(i_met+1) = plot(meth_x_mean(std_thin:std_thin:numel(ecdf_save),i_met),...
-        ecdf_save(std_thin:std_thin:numel(ecdf_save)),marker_style{i_met},...
-        'Color',plot_color(i_met,:),'LineWidth',3,'MarkerSize',20);
+        ecdf_save(std_thin:std_thin:numel(ecdf_save)),p.marker_style{i_met},...
+        'Color',p.plot_color(i_met,:),...
+        'LineWidth',p.lw1,'MarkerSize',p.marker_size);
     
     for k = std_thin:std_thin:numel(ecdf_save)
         ytmp = [ecdf_save(k) ecdf_save(k)];
         xtmp = [meth_x_mean(k,i_met)-meth_x_std(k,i_met) meth_x_mean(k,i_met)+meth_x_std(k,i_met)];
         ytmp_hat = [ytmp(1)-0.01 ytmp(2)+0.01];
-        plot(xtmp,ytmp,'-','Color',plot_color(i_met,:),'LineWidth',3);
-        plot([xtmp(1) xtmp(1)],ytmp_hat,'-','Color',plot_color(i_met,:),'LineWidth',3);
-        plot([xtmp(2) xtmp(2)],ytmp_hat,'-','Color',plot_color(i_met,:),'LineWidth',3);
+        plot(xtmp,ytmp,'-','Color',p.plot_color(i_met,:),'LineWidth',p.lw1);
+        plot([xtmp(1) xtmp(1)],ytmp_hat,'-',...
+            'Color',p.plot_color(i_met,:),'LineWidth',p.lw1);
+        plot([xtmp(2) xtmp(2)],ytmp_hat,'-',...
+            'Color',p.plot_color(i_met,:),'LineWidth',p.lw1);
     end  
 end % for i_met
 
 figure(h);
-% legend(g,g_names,'Location','NorthWest');
-% legend boxoff;
 xlabel('Dot Product of Scaled VP Parameters');
 ylabel('Cumulative Distribution');
 ylim([0 1.05]);
 set(gca,'Ytick',0:0.2:1);
-set(gca,'FontSize',28,'LineWidth',2);
+set(gca,'FontSize',p.fs1,'LineWidth',p.lw2);
 legend(g,['Uniform';method_order],'Location','NorthWest');
 legend boxoff;
+
+print('figures/rieger-fig04-orthogonality-of-vps.pdf','-dpdf','-bestfit');
 
 end % function plot_orthog
 %% ***********************************************************************

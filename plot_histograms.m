@@ -7,6 +7,7 @@ function plot_histograms(t,method_order)
 % error_ellipse.m by AJ Johnson (2004). Available from the MATLAB File
 % Exchange http://www.mathworks.com/matlabcentral/fileexchange/4705-error-ellipse
 % see error_license.txt for the license for this file.
+addpath('./error_ellipse');
 
 npps_lvls = unique(t.num_pps);
 
