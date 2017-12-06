@@ -56,6 +56,7 @@ h(2) = bar(1002,1,'FaceColor','k','EdgeColor','k','LineWidth',3);
 
 set(gca, 'XTick', 1:numel(method_order), 'XTickLabel', labels);
 set(gca,'FontSize',28,'LineWidth',2);
+set(gca, 'YScale','log');
 %set(gca,'YScale','log');
 ylabel('Time (seconds)')
 legend(h,{'Time Per Plausible Patient','Time Per Virtual Patient'});
