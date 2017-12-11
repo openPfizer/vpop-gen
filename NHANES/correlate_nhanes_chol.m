@@ -26,9 +26,9 @@ c = corrcoef(r);
 mvmodel = fitgmdist(r,1); % model parameters should match mean(r) and cov(r).
 
 fs1 = 28;
-figure('Name','Correlations','Units','Inches','Position',[1 1 20 10]);
-if do_plots
 
+if do_plots
+    figure('Name','Correlations','Units','Inches','Position',[1 1 20 10]);
     subplot(3,3,1);
     histogram(lnLDL);
     ylabel('log(LDL)');

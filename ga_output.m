@@ -24,11 +24,11 @@ else
 end
 
 %% Append to existing list of plausible patients if possible
-if exist('results/ga_interim.mat','file') == 2
+if exist('txtout/ga_interim.mat','file') == 2
     % Generation 2+, load and append:
     
     try
-        load('results/ga_interim.mat');
+        load('txtout/ga_interim.mat');
     catch
         disp(first_flag);
         disp(state.Generation);
@@ -45,6 +45,7 @@ if exist('results/ga_interim.mat','file') == 2
     score_pp = score_pp(ia,:);
     
 else   %create new list of plausible patients
+    %fprintf('Interim file not found!\n');
     p_pp = 10.^pps_new;
     score_pp = pps_scores_new;  
 end
@@ -57,6 +58,7 @@ save('txtout/ga_interim.mat', 'p_pp','score_pp','n_pp');
 
 %% Flag exit if we have enough PPs
 if (n_pp >= num_pps)
+%    disp([n_pp num_pps]);
     state.StopFlag = 'y';   
 end
 

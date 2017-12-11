@@ -18,8 +18,10 @@ for i = 1:meth_num
     
     for k = 1:iter_num
         r2 = js.iter == iter_lvl(k);
+        r3 = r2 & js.selection == 1;
         js2 = js(r2,:); % for each iter
-        yvp_iter(k) = mean(js2.gof); % should all be the same entry again and again
+        js3 = js(r3,:);
+        yvp_iter(k) = mean(js3.gof); % should all be the same entry again and again
         
         % Need to calculate the GoF for PPs, not pre-computed:
         mu = js2.mu(1,:);

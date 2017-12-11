@@ -16,11 +16,15 @@ function [p_pp,p_names,mdl_config,pp_yield,p_bnds] = ga_generate_pps(num_pps,vdp
 % Note: this function is method-specific.
 %
 
-num_gen = max(10,num_pps/1e4*2); % Number of generations, can be problem-tuned
+num_gen = 80; % Number of generations, can be problem-tuned
 num_pop = max(num_pps,1e4); % Population size/gen, can be problem-tuned
 do_score = 1; % Flag for turning on scoring of PPs.
 score_fcn = @(x,y)ga_score_model(x,y,mu,sigma); % Set the scoring function for the model, this could also be a passed parameter
 out_fcn = @(a,b,c)ga_output(a,b,c,num_pps);
+
+if exist('txtout/ga_interim.mat')==2
+    delete('txtout/ga_interim.mat')
+end
 
 %% 1. Get VDP model ready for simulation
 
@@ -67,7 +71,7 @@ opt_ga = gaoptimset('Display', 'off', 'Generations', num_gen, ...
         'OutputFcn', out_fcn);
 
 [~,~,~,output] = ga(f,num_p,[],[],[],[],pl,pu,[],[],opt_ga);
-
+%disp(output.message)
 load('txtout/ga_interim.mat'); % bring back the plausible patients (p_pp)
 p_pp = p_pp'; % transpose the plausible patients
 pp_yield = size(p_pp,2)./(output.generations*num_pop);
