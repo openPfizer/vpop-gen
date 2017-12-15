@@ -1,4 +1,5 @@
-%% a_run_vpop_fit -- main simulation script
+function a_run_vpop_fit(varargin)
+%% a_run_vpop_fit -- main simulation function
 % This script generates the data from the manuscript by looping through a
 % user-specfied number of iterations for any number of target PPs for the
 % specified methods. The default options are the ones used in generation of
@@ -7,25 +8,38 @@
 % including:
 %   resume_run - boolean (0 or 1) for starting a new run (0) or resuming a
 %       previous run (1).
-%   txt_name - string for the root of the file names, this will be used for
+%   output_root - string for the root of the file names, this will be used for
 %       writing and reading back results as well as determinig a resume
 %       point.
 %   num_pps - vector of number of plausible patients to target
 %   num_iters - number of iterations for each method and num_pp entry. Use
 %       this option to gather better statistics.
-%   num_regions - NSA method only option for setting the number of
+%   num_regions - NSA-method-only option for setting the number of
 %       ellipses.
 %   methods - cell array specifying which methods to run. Accepted options
 %       are 'SA', 'NSA', 'MH', and 'GA'.
-%   mdl_mat - location of the exported SimBiology model file
+%   mdl_file - location of the exported SimBiology model file (not
+%   typically needed).
 %
 
 %% Startup
-clear;clc;close all;rng('shuffle');
+clc;close all;rng('shuffle');
 addpath('./NHANES');
 addpath('./model');
 addpath('./allcomb');
 
+%% Parse the Varargin
+p = inputParser;
+addParameter(p,'resume_run',0,@(x)ismember(x,[0;1]));
+addParameter(p,'num_pps',100,@(x)(~any(x<=0)));
+addParameter(p,'num_iters',1,@(x)(isnumeric(x) && isscalar(x) && (x > 0)));
+addParameter(p,'methods',{'SA';'NSA';'GA';'MH'},@(x)iscell(x));
+addParameter(p,'num_regions',5,@(x)(isnumeric(x) && isscalar(x) && (x > 0)));
+addParameter(p,'output_root','txtout/my_output_',@(x)ischar(x));
+addParameter(p,'mdl_file','My_Model.mat',@(x)ischar(x));
+parse(p,varargin{:});
+
+%% Output directory check
 % Check if output directory exists (do not change this name without also 
 % correcting ga_interim.m and ga_generate_pps.m):
 if exist('txtout','dir') ~= 7
@@ -33,15 +47,15 @@ if exist('txtout','dir') ~= 7
 end
 
 %% Locate save files and if this is a new run:
-resume_run = 0; % <--- SETS NEW RUN OR RESUME (0 = NEW RUN, 1 = RESUME BASED ON TXTFILES)
-txt_name = 'txtout/check_mh'; % Running text files for extremely long runs or basis for resume
+resume_run = p.Results.resume_run; % <--- SETS NEW RUN OR RESUME (0 = NEW RUN, 1 = RESUME BASED ON TXTFILES)
+txt_name = p.Results.output_root; % Running text files for extremely long runs or basis for resume
 
-%% Key inputs, ONLY relevant if resume_run == 0 (otherwise overwritten):
-num_pps     = [4000]; % Number of plausible patients to attempt to create
-num_iters   = 1;                        % <--- Number of iterations
-num_regions = 5;                        % NSA-method only input, un-needed otherwise
-methods      = {'MH'};  % Method to use, must be a precise input (e.g., 'NSA','SA','GA')
-mdl_mat     = 'My_Model.mat';           % Location of the exported SimBiology model
+%% Alias inputs (irrelevant if resume_run == true):
+num_pps     = p.Results.num_pps;    % Number of plausible patients to attempt to create
+num_iters   = p.Results.num_iters;  % <--- Number of iterations
+num_regions = p.Results.num_regions; % NSA-method only input, un-needed otherwise
+methods      = p.Results.methods;   % Method to use, must be a precise input (e.g., 'NSA','SA','GA')
+mdl_mat     = p.Results.mdl_file;   % Location of the exported SimBiology model
 
 %% Find VPs de novo, or load last results:
 if ~resume_run
@@ -76,4 +90,4 @@ for i_all_iter = i_start:i_end
     write_j_to_file(txt_name,j(i_all_iter),i_all_iter); % write the results to a textfile
 end
 
-%% EoS
+end
