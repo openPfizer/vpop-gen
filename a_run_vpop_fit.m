@@ -1,25 +1,25 @@
 function a_run_vpop_fit(varargin)
 %% a_run_vpop_fit -- main simulation function
-% This script generates the data from the manuscript by looping through a
+% Generates the data from the manuscript by looping through a
 % user-specfied number of iterations for any number of target PPs for the
 % specified methods. The default options are the ones used in generation of
 % the manuscript figures (results will differ slightly due to
 % stochasticity). See the Key Inputs section for the user-specified inputs
 % including:
-%   resume_run - boolean (0 or 1) for starting a new run (0) or resuming a
-%       previous run (1).
-%   output_root - string for the root of the file names, this will be used for
-%       writing and reading back results as well as determinig a resume
-%       point.
-%   num_pps - vector of number of plausible patients to target
-%   num_iters - number of iterations for each method and num_pp entry. Use
-%       this option to gather better statistics.
-%   num_regions - NSA-method-only option for setting the number of
-%       ellipses.
-%   methods - cell array specifying which methods to run. Accepted options
-%       are 'SA', 'NSA', 'MH', and 'GA'.
-%   mdl_file - location of the exported SimBiology model file (not
-%   typically needed).
+%   * resume_run - boolean (0 or 1) for starting a new run (0) or resuming a
+%           previous run (1).
+%   * output_root - string for the root of the file names, this will be used for
+%           writing and reading back results as well as determinig a resume
+%           point.
+%   * num_pps - vector of number of plausible patients to target
+%   * num_iters - number of iterations for each method and num_pp entry. Use
+%           this option to gather better statistics.
+%   * num_regions - NSA-method-only option for setting the number of
+%           ellipses.
+%   * methods - cell array specifying which methods to run. Accepted options
+%           are 'SA', 'NSA', 'MH', and 'GA'.
+%   * mdl_file - location of the exported SimBiology model file (not
+%               typically needed).
 %
 
 %% Startup
