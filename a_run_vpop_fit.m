@@ -34,13 +34,13 @@ end
 
 %% Locate save files and if this is a new run:
 resume_run = 0; % <--- SETS NEW RUN OR RESUME (0 = NEW RUN, 1 = RESUME BASED ON TXTFILES)
-txt_name = 'txtout/check_ga3_'; % Running text files for extremely long runs or basis for resume
+txt_name = 'txtout/check_mh'; % Running text files for extremely long runs or basis for resume
 
 %% Key inputs, ONLY relevant if resume_run == 0 (otherwise overwritten):
-num_pps     = [10000]; % Number of plausible patients to attempt to create
-num_iters   = 3;                        % <--- Number of iterations
+num_pps     = [4000]; % Number of plausible patients to attempt to create
+num_iters   = 1;                        % <--- Number of iterations
 num_regions = 5;                        % NSA-method only input, un-needed otherwise
-methods      = {'GA'};  % Method to use, must be a precise input (e.g., 'NSA','SA','GA')
+methods      = {'MH'};  % Method to use, must be a precise input (e.g., 'NSA','SA','GA')
 mdl_mat     = 'My_Model.mat';           % Location of the exported SimBiology model
 
 %% Find VPs de novo, or load last results:
