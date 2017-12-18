@@ -25,8 +25,8 @@ function a_run_vpop_fit(varargin)
 %
 % clear;clc;close all;rng('shuffle');
 % 
-% a_run_vpop_fit('num_pps',[100;500;1000;5000],'num_iters',4,...
-%     'output_root','txtout/github_run6_');
+% a_run_vpop_fit('num_pps',[100;250;500;1000;5000;7500],'num_iters',5,...
+%     'output_root','txtout/github_run7_');
 %
 
 %% Startup
