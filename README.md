@@ -23,3 +23,5 @@ Since all of the packages' licenses permit redistribution with attribution, they
 
 ### Contact
 * Ted Rieger: ted.rieger@pfizer.com
+
+![alt text](https://github.com/openPfizer/DigitalHealthData/blob/master/img/osbypfizer.png)
