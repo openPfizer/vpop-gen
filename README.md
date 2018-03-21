@@ -21,7 +21,4 @@ The code makes use of three packages from MATLAB Central:
 
 Since all of the packages' licenses permit redistribution with attribution, they are included as subdirectories with this repository. The user should be aware of the individual licenses, credits, and copyrights, which are independent from vpop-gen.
 
-### Contact
-* Ted Rieger: ted.rieger@pfizer.com
-
 ![alt text](https://github.com/openPfizer/DigitalHealthData/blob/master/img/osbypfizer.png)
