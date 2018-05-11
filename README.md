@@ -11,7 +11,7 @@ VPop-Gen is the MATLAB source code for Rieger et al. 2018. With this code, the u
 * [SimBiology](https://www.mathworks.com/products/simbiology.html)
 * [Statistics and Machine Learning](https://www.mathworks.com/products/statistics.html)
 
-For versions of MATLAB before 2016b, there is a known problem with generating the final plots.
+For versions of MATLAB before 2016b there is a problem with generating the final plots.
 
 ### Functions for Running Vpop-Gen
 * `a_make_paper_figs.m` - function that reads the contents of txtout/ and makes figures similar to the manuscript figures.
