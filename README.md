@@ -2,7 +2,7 @@
 VPop-Gen is the MATLAB source code for Rieger et al. 2018. With this code, the user should be able to reproduce all the figures and results from the manuscript. This code is also a natural starting point for extending the methods described in the manuscript to other models, however, it has only been tested against the Van de Pas model to date.  
 
 ### Latest Software Release
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1117870.svg)](https://doi.org/10.5281/zenodo.1117870)
+[![DOI](https://zenodo.org/badge/105279206.svg)](https://zenodo.org/badge/latestdoi/105279206)
 
 ### Required Software
 [MATLAB](https://www.mathworks.com) and several of its toolboxes are required to execute Vpop-Gen. Vpop-Gen was written and tested using MATLAB 2016b (9.1). Execution of the code requires these additional toolboxes:
