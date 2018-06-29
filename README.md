@@ -1,5 +1,8 @@
 # VPop-Gen #
-VPop-Gen is the MATLAB source code for Rieger et al. 2018. With this code, the user should be able to reproduce all the figures and results from the manuscript. This code is also a natural starting point for extending the methods described in the manuscript to other models, however, it has only been tested against the Van de Pas model to date.  
+VPop-Gen is the MATLAB source code for [Rieger et al. 2018.](https://doi.org/10.1016/j.pbiomolbio.2018.06.002) With this code, the user should be able to reproduce all the figures and results from the manuscript. This code is also a natural starting point for extending the methods described in the manuscript to other models, however, it has only been tested against the Van de Pas model to date.  
+
+### Manuscript
+[![DOI](https://zenodo.org/badge/105279206.svg)](https://doi.org/10.1016/j.pbiomolbio.2018.06.002)
 
 ### Latest Software Release
 [![DOI](https://zenodo.org/badge/105279206.svg)](https://zenodo.org/badge/latestdoi/105279206)
